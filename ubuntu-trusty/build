@@ -1,4 +1,7 @@
 #!/bin/bash
 set -ex
-docker build --pull -t rake-standalone-ubuntu-trusty-build build-image
-docker run --rm -v $(pwd)/inside:/application:ro -v $(pwd)/out:/build -w /application rake-standalone-ubuntu-trusty-build /application/build-deb
+cd "${0%/*}"
+DISTRO="trusty"
+docker build --pull -t rake-standalone-ubuntu-${DISTRO}-build build-image
+rm -rf out
+docker run --rm -v $(pwd)/inside:/application:ro -v $(pwd)/out:/build -w /application rake-standalone-ubuntu-${DISTRO}-build /application/build-deb
