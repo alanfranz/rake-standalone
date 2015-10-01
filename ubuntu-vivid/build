@@ -1,0 +1,5 @@
+#!/bin/bash
+set -ex
+DISTRO="vivid"
+docker build --pull -t rake-standalone-ubuntu-${DISTRO}-build build-image
+docker run --rm -v $(pwd)/inside:/application:ro -v $(pwd)/out:/build -w /application rake-standalone-ubuntu-${DISTRO}-build /application/build-deb
