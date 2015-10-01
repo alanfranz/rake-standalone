@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+MAJOR="1"
+MINOR="0"
+
+MAJOR_NAME="rakest${MAJOR}"
+LATEST_NAME="rakest"
+
+EXEC_PATH="/opt/rake-standalone/${MAJOR}.${MINOR}/bin/rake"
+
+/usr/sbin/update-alternatives --remove ${MAJOR_NAME} ${EXEC_PATH}
+/usr/sbin/update-alternatives --remove ${LATEST_NAME} ${EXEC_PATH}

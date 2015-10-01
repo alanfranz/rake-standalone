@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+yum -y install /build/*.rpm
+yum -y install wget
+cd /tmp
+# TODO: set a variable for rake version and major/minor
+wget https://github.com/ruby/rake/archive/v10.4.2.tar.gz
+tar xvf v10.4.2.tar.gz
+cd rake-10.4.2
+ln -sf /usr/bin/rakest bin/rake
+/opt/rake-standalone/1.0/bin/gem install hoe
+rakest newb
