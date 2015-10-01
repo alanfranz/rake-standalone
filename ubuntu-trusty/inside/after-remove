@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-MAJOR="1"
-MINOR="0"
-NAME="rakest${MAJOR}"
-PATH="/opt/rake-standalone/${MAJOR}.${MINOR}/bin/rake"
-
-update-alternatives --remove ${NAME} ${PATH}
