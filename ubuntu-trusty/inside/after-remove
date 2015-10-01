@@ -2,9 +2,7 @@
 set -e
 MAJOR="1"
 MINOR="0"
-LINK="/usr/bin/rakest${MAJOR}"
 NAME="rakest${MAJOR}"
 PATH="/opt/rake-standalone/${MAJOR}.${MINOR}/bin/rake"
-PRIORITY="${MINOR}"
 
-update-alternatives --install ${LINK} ${NAME} ${PATH} ${PRIORITY}
+update-alternatives --remove ${NAME} ${PATH}
