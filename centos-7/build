@@ -1,9 +1,14 @@
 #!/bin/bash
 set -ex
 cd "${0%/*}"
-DISTRO="centos7"
+BUILD_DISTRO="centos7"
 TEST_DISTRO="centos:7"
-docker build --pull -t rake-standalone-ubuntu-${DISTRO}-build build-image
+
+CONCATENATED=""
+for x in $(cat ../env.list); do CONCATENATED="${CONCATENATED} --build-arg $x "; done
+docker build ${CONCATENATED} --pull -t rake-standalone-ubuntu-${BUILD_DISTRO}-build build-image
 rm -rf out
-docker run --rm -v $(pwd)/inside:/application:ro -v $(pwd)/out:/build -w /application rake-standalone-ubuntu-${DISTRO}-build /application/build-rpm
-docker run --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/build -w /test ${TEST_DISTRO} /test/test
+
+docker run --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside rake-standalone-ubuntu-${BUILD_DISTRO}-build /inside/build-package
+
+docker run --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_DISTRO} /test/test
