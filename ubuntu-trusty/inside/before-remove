@@ -1,7 +1,5 @@
 #!/bin/bash
 set -e
-MAJOR="1"
-MINOR="0"
 
 MAJOR_NAME="rakest${MAJOR}"
 LATEST_NAME="rakest"

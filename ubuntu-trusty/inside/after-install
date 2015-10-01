@@ -1,7 +1,5 @@
 #!/bin/bash
 set -e
-MAJOR="1"
-MINOR="0"
 
 MAJOR_LINK="/usr/bin/rakest${MAJOR}"
 MAJOR_NAME="rakest${MAJOR}"

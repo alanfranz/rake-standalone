@@ -1,7 +1,0 @@
-#!/bin/bash
-set -ex
-MAJOR="1"
-MINOR="0"
-cd /build
-fpm -t deb -s dir -n rake-standalone-${MAJOR}-${MINOR} --version "${MAJOR}.${MINOR}" --after-install /application/after-install --before-remove /application/before-remove --provides rake-standalone --provides rake-standalone-${MAJOR} -C / opt
-chown -R --reference /application/build-deb .
