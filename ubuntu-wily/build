@@ -1,0 +1,15 @@
+#!/bin/bash
+set -ex
+cd "${0%/*}"
+TEST_DISTRO="ubuntu:wily"
+BUILD_IMAGE="rake-standalone-ubuntu-wily-build"
+
+CONCATENATED=""
+for x in $(cat ../env.list); do CONCATENATED="${CONCATENATED} --build-arg $x "; done
+
+docker build ${CONCATENATED} --pull -t ${BUILD_IMAGE} build-image
+rm -rf out
+
+docker run --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
+
+docker run --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_DISTRO} /test/test
