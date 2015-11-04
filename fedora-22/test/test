@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+yum -y install /out/*.rpm
+yum -y install wget
+cd /tmp
+# TODO: set a variable for rake version and major/minor
+wget https://github.com/ruby/rake/archive/v${RAKE_VERSION}.tar.gz
+tar xvf v${RAKE_VERSION}.tar.gz
+cd rake-${RAKE_VERSION}
+ln -sf /usr/bin/rakest bin/rake
+/opt/rake-standalone/${MAJOR}.${MINOR}/bin/gem install hoe
+rakest newb
