@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+dpkg -i /out/*.deb
+apt-get -y update
+apt-get -y -f install
+apt-get -y install wget
+cd /tmp
+wget https://github.com/ruby/rake/archive/v${RAKE_VERSION}.tar.gz
+tar xvf v${RAKE_VERSION}.tar.gz
+cd rake-${RAKE_VERSION}
+ln -sf /usr/bin/rakest bin/rake
+/opt/rake-standalone/${MAJOR}.${MINOR}/bin/gem install hoe
+rakest newb
