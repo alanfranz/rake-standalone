@@ -10,6 +10,6 @@ for x in $(cat ../env.list); do CONCATENATED="${CONCATENATED} --build-arg $x "; 
 docker build ${CONCATENATED} --pull -t ${BUILD_IMAGE} build-image
 rm -rf out
 
-docker run -e "BUILD_NUMBER=${BUILD_NUMBER:-0}" --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
+docker run --rm -e "BUILD_NUMBER=${BUILD_NUMBER:-0}" --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
 
-docker run  --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_DISTRO} /test/test
+docker run --rm  --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_DISTRO} /test/test
