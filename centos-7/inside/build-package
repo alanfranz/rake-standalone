@@ -3,5 +3,5 @@ set -e
 #MAJOR="1"
 #MINOR="0"
 cd /out
-fpm -t rpm -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
+fpm -t rpm -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
 chown -R --reference /inside/build-package .
