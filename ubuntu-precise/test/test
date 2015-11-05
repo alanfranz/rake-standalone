@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 dpkg -i /out/*.deb || /bin/true
+apt-get -y update
 apt-get -y -f install
-apt-get -y install wget
+apt-get -y install wget ca-certificates
 cd /tmp
-wget --no-check-certificate https://github.com/ruby/rake/archive/v${RAKE_VERSION}.tar.gz
+wget https://github.com/ruby/rake/archive/v${RAKE_VERSION}.tar.gz
 tar xvf v${RAKE_VERSION}.tar.gz
 cd rake-${RAKE_VERSION}
 ln -sf /usr/bin/rakest bin/rake
