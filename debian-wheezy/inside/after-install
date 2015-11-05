@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+MAJOR_LINK="/usr/bin/rakest${MAJOR}"
+MAJOR_NAME="rakest${MAJOR}"
+MAJOR_PRIORITY="${MINOR}"
+
+LATEST_LINK="/usr/bin/rakest"
+LATEST_NAME="rakest"
+LATEST_PRIORITY="$((${MAJOR}*100 + ${MINOR}))"
+
+EXEC_PATH="/opt/rake-standalone/${MAJOR}.${MINOR}/bin/rake"
+
+/usr/bin/update-alternatives --install ${MAJOR_LINK} ${MAJOR_NAME} ${EXEC_PATH} ${MAJOR_PRIORITY}
+/usr/bin/update-alternatives --install ${LATEST_LINK} ${LATEST_NAME} ${EXEC_PATH} ${LATEST_PRIORITY}
