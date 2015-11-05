@@ -1,5 +1,5 @@
 #!/bin/bash
 set -ex
 cd /out
-fpm -t deb -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
+fpm -t deb -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
 chown -R --reference /inside/build-package .

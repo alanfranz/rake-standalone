@@ -12,4 +12,4 @@ rm -rf out
 docker run --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
 
 docker build --pull -t ${TEST_IMAGE} test
-docker run --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_IMAGE} /test/test
+docker run -e "BUILD_NUMBER=${BUILD_NUMBER:-0}" --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_IMAGE} /test/test
