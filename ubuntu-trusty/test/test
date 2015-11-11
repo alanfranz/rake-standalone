@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
-dpkg -i /out/*.deb
+set -ex
+MAJOR="" MINOR="" dpkg -i /out/*.deb
 apt-get -y -f install
 apt-get -y install wget
 cd /tmp
