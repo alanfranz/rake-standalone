@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
-#MAJOR="1"
-#MINOR="0"
+gpg --import /sign.key
+[[ $(gpg --list-secret-keys) =~ uid(.*) ]]
+KEYNAME="${BASH_REMATCH[1]}"
+[ -n "${KEYNAME}" ] || { echo "could not find key for signing purpose"; exit 1; }
+echo -e "%_gpg_name ${KEYNAME}\n%_signature gpg" > ${HOME}/.rpmmacros
+#		         echo -e "\n" | setsid rpmbuild -bb --sign $SPEC ||  { [ "bashonfail" == "${BASH_ON_FAIL}" ] && { echo "Build failed, spawning a shell" ; /bin/bash ; exit 1; } || /bin/false ; }
+
 cd /out
-fpm -t rpm -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
+fpm -t rpm -s dir -n rake-standalone-${MAJOR} --rpm-sign --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
 chown -R --reference /inside/build-package .

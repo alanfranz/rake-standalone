@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-find * -maxdepth 0 -type d -exec {}/build \; 
+find * -maxdepth 0 -type d -exec {}/build test-secret.pgp test-public.pgp \; 
