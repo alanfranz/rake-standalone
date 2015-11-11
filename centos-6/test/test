@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+echo "localpkg_gpgcheck=1" >> /etc/yum.conf
 yum -y install /out/*.rpm
 yum -y install wget
 cd /tmp
