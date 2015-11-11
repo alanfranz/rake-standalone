@@ -1,5 +1,11 @@
 #!/bin/bash
 set -ex
+
+GPG_PRIVATE_KEY_FILE=$(readlink -f $1)
+GPG_PUBLIC_KEY_FILE=$(readlink -f $2)
+[ -r "${GPG_PRIVATE_KEY_FILE}" ] || { echo "missing private signature key file"; exit 1; }
+[ -r "${GPG_PUBLIC_KEY_FILE}" ] || { echo "missing public signature key file"; exit 1; }
+
 cd "${0%/*}"
 TEST_IMAGE="rake-standalone-fedora22-test"
 BUILD_IMAGE="rake-standalone-fedora22-build"
@@ -9,7 +15,7 @@ for x in $(cat ../env.list); do CONCATENATED="${CONCATENATED} --build-arg $x "; 
 docker build ${CONCATENATED} --pull -t ${BUILD_IMAGE} build-image
 rm -rf out
 
-docker run --rm -e "BUILD_NUMBER=${BUILD_NUMBER:-0}" --env-file ../env.list --rm -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
+docker run -e "BUILD_NUMBER=${BUILD_NUMBER:-0}" --env-file ../env.list --rm -v "${GPG_PRIVATE_KEY_FILE}":/sign.key:ro -v $(pwd)/inside:/inside:ro -v $(pwd)/out:/out -w /inside ${BUILD_IMAGE} /inside/build-package
 
 docker build -t ${TEST_IMAGE} test
-docker run --rm  --env-file ../env.list --rm -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_IMAGE} /test/test
+docker run --env-file ../env.list --rm -v "${GPG_PUBLIC_KEY_FILE}":/sign.pub:ro -v $(pwd)/test:/test:ro -v $(pwd)/out:/out -w /test ${TEST_IMAGE} /test/test
