@@ -12,8 +12,9 @@ The world is full of good build tools. [GNU Make](https://www.gnu.org/software/m
 Some of those are designed to cope with specific technologies, and work best with such. Others are or can be generic,
 but require a bit of effort in order to perform random tasks (e.g. launch some command with some parameters)
 
-In many situations what I would like would just be an "enhanced bash" - bash is sometimes just too fragile
+In many situations what I would like would just be an "enhanced bash" - but bash is sometimes just too fragile
 to perform some of the tasks which are needed during a build.
+There're other shells around, for sure, but they're still suited to do something different.
 
 One day I found that [Rake](https://github.com/ruby/rake) is a good generic tool to perform random tasks -
 ruby's text manipulation capabilities make for a great make replacement tool.
@@ -42,10 +43,20 @@ So, once you install ```rake-standalone-1``` you'll have ```rakest1``` and ```ra
 
 ## Example
 
-*Rakefile.rb* content:
+*Rakefile* content:
 ```
-#!rakest1 -f
+#!/usr/bin/env rakest1
+desc "echo something"
+task :default do
+  sh "echo hello world
 ```
+
+Then, make it executable. You're done!
+
+Please refer to the [official rake documentation](http://docs.seattlerb.org/rake/) and to
+[rake tutorial](http://jasonseifer.com/2010/04/06/rake-tutorial)
+for further info. There's no string attached to what you can or can't
+do with rake standalone.
 
 ## Installing
 
@@ -140,7 +151,6 @@ deb http://www.a9f.eu/apt/rake-standalone-stable/debian wheezy main
 
 ```
 deb http://www.a9f.eu/apt/rake-standalone-stable/debian jessie main
-```
 
 
 ### From scratch
