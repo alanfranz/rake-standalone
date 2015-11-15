@@ -49,6 +49,7 @@ So, once you install ```rake-standalone-1``` you'll have ```rakest1``` and ```ra
 desc "echo something"
 task :default do
   sh "echo hello world
+end
 ```
 
 Then, make it executable. You're done!
