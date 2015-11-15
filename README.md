@@ -151,7 +151,7 @@ deb http://www.a9f.eu/apt/rake-standalone-stable/debian wheezy main
 
 ```
 deb http://www.a9f.eu/apt/rake-standalone-stable/debian jessie main
-
+```
 
 ### From scratch
 
