@@ -166,3 +166,8 @@ Then link such rake executable to be in PATH as ```rakest<API_VERSION>``` and, i
 # Disclaimer
 
 I'm not affiliated with Rake developers.
+
+# TODO
+
+* homebrew tap for OSX
+* think whether we would benefit from other libraries in such a standard distribution.
