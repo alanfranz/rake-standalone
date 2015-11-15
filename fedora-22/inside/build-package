@@ -7,5 +7,5 @@ KEYNAME="${BASH_REMATCH[1]}"
 echo -e "%_gpg_name ${KEYNAME}\n%_signature gpg" > ${HOME}/.rpmmacros
 
 cd /out
-fpm -t rpm -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
+fpm -t rpm -s dir -n rake-standalone-${MAJOR} --version "${MAJOR}.${MINOR}" --iteration ${BUILD_NUMBER} --description "rake-standalone built from ${GIT_COMMIT}" --after-install /inside/after-install --before-remove /inside/before-remove --provides rake-standalone -C / opt
 chown -R --reference /inside/build-package .
