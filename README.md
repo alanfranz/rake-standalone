@@ -4,6 +4,11 @@ Rake standalone is just a prepackaged, stable API (Ruby version + Rake version) 
 
 Because life is too short to convert spaces to tabs.
 
+## PROJECT IS SUSPENDED
+
+I'm probably not willing to invest a lot in this project anymore. There're a lot of good build tools that I've come to like after building this. Repositories will be unpublished soon.
+
+
 ## Rationale
 
 The world is full of good build tools. [GNU Make](https://www.gnu.org/software/make/), [CMake](https://cmake.org/),
